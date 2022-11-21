@@ -1,0 +1,112 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://spring.io/guides/gs-producing-web-service"
+           targetNamespace="http://spring.io/guides/gs-producing-web-service" elementFormDefault="qualified">
+
+    <xs:complexType name="song">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="lyrics" type="xs:string"/>
+            <xs:element name="oroginalTone" type="xs:string"/>
+            <xs:element name="femaleTone" type="xs:string"/>
+            <xs:element name="maleTone" type="xs:string"/>
+            <xs:element name="artist" type="xs:string"/>
+            <xs:element name="time" type="xs:integer"/>
+            <xs:element name="genre" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="serviceStatus">
+        <xs:sequence>
+            <xs:element name="status" type="xs:string" />
+            <xs:element name="message" type="xs:string" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="addSongRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="song" type="tns:song" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="addSongResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="serviceStatus" type="tns:serviceStatus" />
+                <xs:element name="song" type="tns:song" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getSongByIdRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+                <xs:element name="serviceStatus" type="tns:serviceStatus" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getSongByIdResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="song" type="tns:song"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getSongByNameRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getSongByNameResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="song" type="tns:song"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getAllSongsRequest">
+        <xs:complexType/>
+    </xs:element>
+    <xs:element name="getAllSongsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="song" type="tns:song" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="updateSongRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="song" type="tns:song" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="updateSongResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="serviceStatus" type="tns:serviceStatus" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="deleteSongRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="deleteSongResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="serviceStatus" type="tns:serviceStatus" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

@@ -13,7 +13,7 @@ public class SongModel {
     private String oroginalTone;
     private String femaleTone;
     private String maleTone;
-    private long artistId;
+    private String artist;
     private int time;
     private String genre;
 
@@ -65,12 +65,12 @@ public class SongModel {
         this.maleTone = maleTone;
     }
 
-    public long getArtistId() {
-        return artistId;
+    public String getArtistId() {
+        return artist;
     }
 
-    public void setArtistId(long artistId) {
-        this.artistId = artistId;
+    public void setArtist(String artist) {
+        this.artist = artist;
     }
 
     public int getTime() {
