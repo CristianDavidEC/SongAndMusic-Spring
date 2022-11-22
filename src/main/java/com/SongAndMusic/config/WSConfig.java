@@ -1,4 +1,4 @@
-package com.SongAndMusic.soap.config;
+package com.SongAndMusic.config;
 
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;
@@ -14,9 +14,14 @@ import org.springframework.xml.xsd.XsdSchema;
 
 @Configuration
 @EnableWs
-public class ConfigSoap extends WsConfigurerAdapter {
+public class WSConfig extends WsConfigurerAdapter {
+    @Bean
+    public XsdSchema songSchema() {
+        return new SimpleXsdSchema(
+                new ClassPathResource("songs.xsd")
+        );
+    }
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Bean
     public ServletRegistrationBean messageDispatcherServlet(ApplicationContext applicationContext) {
         MessageDispatcherServlet servlet = new MessageDispatcherServlet();
@@ -24,17 +29,13 @@ public class ConfigSoap extends WsConfigurerAdapter {
         servlet.setTransformWsdlLocations(true);
         return new ServletRegistrationBean(servlet, "/ws/*");
     }
-    @Bean(name = "users")
+    @Bean(name = "songs")
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema songSchema) {
         DefaultWsdl11Definition definition = new DefaultWsdl11Definition();
-        definition.setPortTypeName("SongSoapPort");
+        definition.setPortTypeName("SongPort");
         definition.setLocationUri("/ws");
         definition.setTargetNamespace("http://spring.io/guides/gs-producing-web-service");
         definition.setSchema(songSchema);
         return definition;
-    }
-    @Bean
-    public XsdSchema usersSchema() {
-        return new SimpleXsdSchema(new ClassPathResource("xsds/songs.xsd"));
     }
 }

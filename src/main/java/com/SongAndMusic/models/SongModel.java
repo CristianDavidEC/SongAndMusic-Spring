@@ -10,7 +10,7 @@ public class SongModel {
     private long id;
     private String name;
     private String lyrics;
-    private String oroginalTone;
+    private String originalTone;
     private String femaleTone;
     private String maleTone;
     private String artist;
@@ -41,12 +41,12 @@ public class SongModel {
         this.lyrics = lyrics;
     }
 
-    public String getOroginalTone() {
-        return oroginalTone;
+    public String getOriginalTone() {
+        return originalTone;
     }
 
-    public void setOroginalTone(String oroginalTone) {
-        this.oroginalTone = oroginalTone;
+    public void setOriginalTone(String originalTone) {
+        this.originalTone = originalTone;
     }
 
     public String getFemaleTone() {

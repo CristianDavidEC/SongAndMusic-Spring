@@ -2,7 +2,7 @@
 // Este archivo ha sido generado por la arquitectura JavaTM para la implantación de la referencia de enlace (JAXB) XML v2.3.2 
 // Visite <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
 // Todas las modificaciones realizadas en este archivo se perderán si se vuelve a compilar el esquema de origen. 
-// Generado el: 2022.11.21 a las 04:58:12 PM COT 
+// Generado el: 2022.11.21 a las 09:35:05 PM COT 
 //
 
 
@@ -28,7 +28,7 @@ import java.math.BigInteger;
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long"/&gt;
  *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="lyrics" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="oroginalTone" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="originalTone" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="femaleTone" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="maleTone" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="artist" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
@@ -47,7 +47,7 @@ import java.math.BigInteger;
     "id",
     "name",
     "lyrics",
-    "oroginalTone",
+    "originalTone",
     "femaleTone",
     "maleTone",
     "artist",
@@ -62,7 +62,7 @@ public class Song {
     @XmlElement(required = true)
     protected String lyrics;
     @XmlElement(required = true)
-    protected String oroginalTone;
+    protected String originalTone;
     @XmlElement(required = true)
     protected String femaleTone;
     @XmlElement(required = true)
@@ -139,27 +139,27 @@ public class Song {
     }
 
     /**
-     * Obtiene el valor de la propiedad oroginalTone.
+     * Obtiene el valor de la propiedad originalTone.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getOroginalTone() {
-        return oroginalTone;
+    public String getOriginalTone() {
+        return originalTone;
     }
 
     /**
-     * Define el valor de la propiedad oroginalTone.
+     * Define el valor de la propiedad originalTone.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setOroginalTone(String value) {
-        this.oroginalTone = value;
+    public void setOriginalTone(String value) {
+        this.originalTone = value;
     }
 
     /**

@@ -1,4 +1,4 @@
-package com.SongAndMusic.soap.endpoints;
+/*package com.SongAndMusic.soap.endpoints;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
-import gs_ws.*;
+import com.song_soap.gs_ws.*;
 import com.SongAndMusic.models.SongModel;
 
 @Endpoint
@@ -85,4 +85,4 @@ public class SongEndpointSoap {
         response.setServiceStatus(serviceStatus);
         return response;
     }
-}
+}*/

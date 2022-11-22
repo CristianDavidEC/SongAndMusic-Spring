@@ -1,16 +1,18 @@
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://spring.io/guides/gs-producing-web-service"
-           targetNamespace="http://spring.io/guides/gs-producing-web-service" elementFormDefault="qualified">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://spring.io/guides/gs-producing-web-service"
+           targetNamespace="http://spring.io/guides/gs-producing-web-service"
+           elementFormDefault="qualified">
 
-    <xs:complexType name="song">
+    <xs:complexType name="songInfo">
         <xs:sequence>
             <xs:element name="id" type="xs:long"/>
             <xs:element name="name" type="xs:string"/>
             <xs:element name="lyrics" type="xs:string"/>
-            <xs:element name="oroginalTone" type="xs:string"/>
+            <xs:element name="originalTone" type="xs:string"/>
             <xs:element name="femaleTone" type="xs:string"/>
             <xs:element name="maleTone" type="xs:string"/>
             <xs:element name="artist" type="xs:string"/>
-            <xs:element name="time" type="xs:integer"/>
+            <xs:element name="time" type="xs:int"/>
             <xs:element name="genre" type="xs:string"/>
         </xs:sequence>
     </xs:complexType>
@@ -25,7 +27,7 @@
     <xs:element name="addSongRequest">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="song" type="tns:song" />
+                <xs:element name="songInfo" type="tns:songInfo" />
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -33,7 +35,7 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="serviceStatus" type="tns:serviceStatus" />
-                <xs:element name="song" type="tns:song" />
+                <xs:element name="songInfo" type="tns:songInfo" />
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -49,7 +51,7 @@
     <xs:element name="getSongByIdResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="song" type="tns:song"/>
+                <xs:element name="songInfo" type="tns:songInfo"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -64,7 +66,7 @@
     <xs:element name="getSongByNameResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="song" type="tns:song"/>
+                <xs:element name="songInfo" type="tns:songInfo"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -75,7 +77,7 @@
     <xs:element name="getAllSongsResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="song" type="tns:song" maxOccurs="unbounded"/>
+                <xs:element name="songInfo" type="tns:songInfo" maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -83,7 +85,7 @@
     <xs:element name="updateSongRequest">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="song" type="tns:song" />
+                <xs:element name="songInfo" type="tns:songInfo" />
             </xs:sequence>
         </xs:complexType>
     </xs:element>
