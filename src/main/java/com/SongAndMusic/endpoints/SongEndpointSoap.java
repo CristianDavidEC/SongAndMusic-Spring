@@ -1,4 +1,4 @@
-/*package com.SongAndMusic.soap.endpoints;
+package com.SongAndMusic.endpoints;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ public class SongEndpointSoap {
         ServiceStatus serviceStatus = new ServiceStatus();
 
         SongModel newSong = new SongModel();
-        BeanUtils.copyProperties(request.getSong(), newSong);
+        BeanUtils.copyProperties(request.getSongInfo(), newSong);
         songService.saveSong(newSong);
         serviceStatus.setStatus("SUCCESS");
         serviceStatus.setMessage("Content Added Successfully");
@@ -38,9 +38,9 @@ public class SongEndpointSoap {
     @ResponsePayload
     public GetSongByIdResponse getUser(@RequestPayload GetSongByIdRequest request) {
         GetSongByIdResponse response = new GetSongByIdResponse();
-        Song  songInfo =  new Song();
+        SongInfo  songInfo =  new SongInfo();
         BeanUtils.copyProperties(songService.getSongById(request.getId()), songInfo);
-        response.setSong(songInfo);
+        response.setSongInfo(songInfo);
         return response;
     }
 
@@ -48,14 +48,14 @@ public class SongEndpointSoap {
     @ResponsePayload
     public GetAllSongsResponse getAllUsers() {
         GetAllSongsResponse response = new GetAllSongsResponse();
-        List<Song> articleInfoList = new ArrayList<>();
+        List<SongInfo> articleInfoList = new ArrayList<>();
         List<SongModel> articleList = songService.getAllSongs();
         for (int i = 0; i < articleList.size(); i++) {
-            Song ob = new Song();
+            SongInfo ob = new SongInfo();
             BeanUtils.copyProperties(articleList.get(i), ob);
             articleInfoList.add(ob);
         }
-        response.getSong().addAll(articleInfoList);
+        response.getSongInfo().addAll(articleInfoList);
         return response;
     }
 
@@ -63,7 +63,7 @@ public class SongEndpointSoap {
     @ResponsePayload
     public UpdateSongResponse updateUser(@RequestPayload UpdateSongRequest request) {
         SongModel updateSong = new SongModel();
-        BeanUtils.copyProperties(request.getSong(), updateSong);
+        BeanUtils.copyProperties(request.getSongInfo(), updateSong);
         songService.saveSong(updateSong);
         ServiceStatus serviceStatus = new ServiceStatus();
         serviceStatus.setStatus("SUCCESS");
@@ -85,4 +85,4 @@ public class SongEndpointSoap {
         response.setServiceStatus(serviceStatus);
         return response;
     }
-}*/
+}

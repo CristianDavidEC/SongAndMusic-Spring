@@ -2,7 +2,7 @@
 // Este archivo ha sido generado por la arquitectura JavaTM para la implantación de la referencia de enlace (JAXB) XML v2.3.2 
 // Visite <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
 // Todas las modificaciones realizadas en este archivo se perderán si se vuelve a compilar el esquema de origen. 
-// Generado el: 2022.11.21 a las 09:35:05 PM COT 
+// Generado el: 2022.11.22 a las 10:25:43 AM COT 
 //
 
 
@@ -45,11 +45,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Song }
+     * Create an instance of {@link SongInfo }
      * 
      */
-    public Song createSong() {
-        return new Song();
+    public SongInfo createSongInfo() {
+        return new SongInfo();
     }
 
     /**

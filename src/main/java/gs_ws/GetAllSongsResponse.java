@@ -2,7 +2,7 @@
 // Este archivo ha sido generado por la arquitectura JavaTM para la implantación de la referencia de enlace (JAXB) XML v2.3.2 
 // Visite <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
 // Todas las modificaciones realizadas en este archivo se perderán si se vuelve a compilar el esquema de origen. 
-// Generado el: 2022.11.21 a las 09:35:05 PM COT 
+// Generado el: 2022.11.22 a las 10:25:43 AM COT 
 //
 
 
@@ -23,7 +23,7 @@ import java.util.List;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="song" type="{http://spring.io/guides/gs-producing-web-service}song" maxOccurs="unbounded"/&gt;
+ *         &lt;element name="songInfo" type="{http://spring.io/guides/gs-producing-web-service}songInfo" maxOccurs="unbounded"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -34,41 +34,41 @@ import java.util.List;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "song"
+    "songInfo"
 })
 @XmlRootElement(name = "getAllSongsResponse")
 public class GetAllSongsResponse {
 
     @XmlElement(required = true)
-    protected List<Song> song;
+    protected List<SongInfo> songInfo;
 
     /**
-     * Gets the value of the song property.
+     * Gets the value of the songInfo property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the song property.
+     * This is why there is not a <CODE>set</CODE> method for the songInfo property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getSong().add(newItem);
+     *    getSongInfo().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Song }
+     * {@link SongInfo }
      * 
      * 
      */
-    public List<Song> getSong() {
-        if (song == null) {
-            song = new ArrayList<Song>();
+    public List<SongInfo> getSongInfo() {
+        if (songInfo == null) {
+            songInfo = new ArrayList<SongInfo>();
         }
-        return this.song;
+        return this.songInfo;
     }
 
 }

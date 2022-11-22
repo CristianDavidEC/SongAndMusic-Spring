@@ -14,7 +14,7 @@ import org.springframework.xml.xsd.XsdSchema;
 
 @Configuration
 @EnableWs
-public class WSConfig extends WsConfigurerAdapter {
+public class WSConfig{
     @Bean
     public XsdSchema songSchema() {
         return new SimpleXsdSchema(
@@ -30,12 +30,12 @@ public class WSConfig extends WsConfigurerAdapter {
         return new ServletRegistrationBean(servlet, "/ws/*");
     }
     @Bean(name = "songs")
-    public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema songSchema) {
+    public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema songsSchema) {
         DefaultWsdl11Definition definition = new DefaultWsdl11Definition();
         definition.setPortTypeName("SongPort");
         definition.setLocationUri("/ws");
         definition.setTargetNamespace("http://spring.io/guides/gs-producing-web-service");
-        definition.setSchema(songSchema);
+        definition.setSchema(songsSchema);
         return definition;
     }
 }
