@@ -51,9 +51,13 @@ Install postmant to perform the request tests.
 
 [Link to Install PostMan](https://www.postman.com/downloads/)
 
-Create your requests for testing or use the following collection of guides
+Create your requests for testing or use the following collection of guides and make requests as required.
 
 [Collection Postman Spring](https://elements.getpostman.com/redirect?entityId=11608044-10a50a35-0328-46bf-ac4f-ccf13918864c&entityType=collection)
+
+If you are not familiar with postman, check the documentation.
+
+[PostMan Documnetation](https://learning.postman.com/docs/getting-started/introduction/)
 
 I hope this project will be useful to learn the basic concepts of a REST and SOAP api using sprig-boot.
 
