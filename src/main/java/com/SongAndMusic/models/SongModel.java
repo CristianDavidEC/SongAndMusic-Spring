@@ -65,7 +65,7 @@ public class SongModel {
         this.maleTone = maleTone;
     }
 
-    public String getArtistId() {
+    public String getArtist() {
         return artist;
     }
 
@@ -87,5 +87,17 @@ public class SongModel {
 
     public void setGenre(String genre) {
         this.genre = genre;
+    }
+
+    public boolean isValidSong () {
+        if (this.getName() == null || this.getName().isEmpty()) {
+            return false;
+        }
+
+        if (this.getOriginalTone() == null || this.getOriginalTone().isEmpty()) {
+            return false;
+        }
+
+        return true;
     }
 }

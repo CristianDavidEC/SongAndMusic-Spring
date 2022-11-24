@@ -9,5 +9,4 @@ import java.util.ArrayList;
 @Repository
 public interface SongRepository extends CrudRepository<SongModel, Long> {
     public  abstract ArrayList<SongModel> findByName(String name);
-
 }

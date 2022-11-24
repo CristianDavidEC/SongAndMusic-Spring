@@ -1,11 +1,15 @@
 package com.SongAndMusic.endpoints;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.SongAndMusic.services.SongService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.lang.NonNull;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
@@ -21,68 +25,130 @@ public class SongEndpointSoap {
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "addSongRequest")
     @ResponsePayload
-    public AddSongResponse addUser(@RequestPayload AddSongRequest request) {
+    public AddSongResponse addSong(@RequestPayload AddSongRequest request) {
+        SongModel addSong = new SongModel();
         AddSongResponse response = new AddSongResponse();
-        ServiceStatus serviceStatus = new ServiceStatus();
+        String message = "Song added successfully";
+        BeanUtils.copyProperties(request.getSongInfo(), addSong);
 
-        SongModel newSong = new SongModel();
-        BeanUtils.copyProperties(request.getSongInfo(), newSong);
-        songService.saveSong(newSong);
-        serviceStatus.setStatus("SUCCESS");
-        serviceStatus.setMessage("Content Added Successfully");
-        response.setServiceStatus(serviceStatus);
+        if (!addSong.isValidSong()){
+            message = "The Request Data Is Not Valid";
+            response.setServiceStatus(getServiceStatus(HttpStatus.BAD_REQUEST.toString(), message));
+
+            return response;
+        }
+
+        songService.saveSong(addSong);
+        response.setServiceStatus(getServiceStatus(HttpStatus.OK.toString(), message));
+
         return response;
     }
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getSongByIdRequest")
     @ResponsePayload
-    public GetSongByIdResponse getUser(@RequestPayload GetSongByIdRequest request) {
+    public GetSongByIdResponse getSongId(@RequestPayload GetSongByIdRequest request) {
         GetSongByIdResponse response = new GetSongByIdResponse();
         SongInfo  songInfo =  new SongInfo();
-        BeanUtils.copyProperties(songService.getSongById(request.getId()), songInfo);
+        String message = "Content Found";
+        SongModel songFound = songService.getSongById(request.getId());
+
+        if (songFound == null) {
+            message = "Content Not Found";
+            response.setServiceStatus(getServiceStatus(HttpStatus.NOT_FOUND.toString(), message));
+
+            return response;
+        }
+
+        BeanUtils.copyProperties(songFound, songInfo);
         response.setSongInfo(songInfo);
+        response.setServiceStatus(getServiceStatus(HttpStatus.OK.toString(), message));
+
+        return response;
+    }
+
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getSongByNameRequest")
+    @ResponsePayload
+    public GetSongByNameResponse getSongName(@RequestPayload GetSongByNameRequest request) {
+        GetSongByNameResponse response = new GetSongByNameResponse();
+        String message = "Content Found";
+        List<SongModel> songListFound = songService.findByName(request.getName());
+
+        if (songListFound.isEmpty()) {
+            message = "Content Not Found";
+            response.setServiceStatus(getServiceStatus(HttpStatus.NOT_FOUND.toString(), message));
+
+            return response;
+        }
+
+        for (SongModel song : songListFound) {
+            SongInfo songInfo =  new SongInfo();
+            BeanUtils.copyProperties(song, songInfo);
+            response.getSongInfo().add(songInfo);
+        }
+        response.setServiceStatus(getServiceStatus(HttpStatus.OK.toString(), message));
+
         return response;
     }
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getAllSongsRequest")
     @ResponsePayload
-    public GetAllSongsResponse getAllUsers() {
+    public GetAllSongsResponse getAllSongs() {
         GetAllSongsResponse response = new GetAllSongsResponse();
-        List<SongInfo> articleInfoList = new ArrayList<>();
-        List<SongModel> articleList = songService.getAllSongs();
-        for (int i = 0; i < articleList.size(); i++) {
-            SongInfo ob = new SongInfo();
-            BeanUtils.copyProperties(articleList.get(i), ob);
-            articleInfoList.add(ob);
+        List<SongModel> songListFound = songService.getAllSongs();
+
+        for (SongModel song : songListFound) {
+            SongInfo songInfo =  new SongInfo();
+            BeanUtils.copyProperties(song, songInfo);
+            response.getSongInfo().add(songInfo);
         }
-        response.getSongInfo().addAll(articleInfoList);
+
         return response;
     }
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "updateSongRequest")
     @ResponsePayload
-    public UpdateSongResponse updateUser(@RequestPayload UpdateSongRequest request) {
+    public UpdateSongResponse updateSong(@RequestPayload UpdateSongRequest request) {
         SongModel updateSong = new SongModel();
-        BeanUtils.copyProperties(request.getSongInfo(), updateSong);
-        songService.saveSong(updateSong);
-        ServiceStatus serviceStatus = new ServiceStatus();
-        serviceStatus.setStatus("SUCCESS");
-        serviceStatus.setMessage("Content Updated Successfully");
         UpdateSongResponse response = new UpdateSongResponse();
-        response.setServiceStatus(serviceStatus);
+        String message = "Content Updated Successfully";
+        BeanUtils.copyProperties(request.getSongInfo(), updateSong);
+
+        if (!updateSong.isValidSong()){
+            message = "The Request Data Is Not Valid";
+            response.setServiceStatus(getServiceStatus(HttpStatus.BAD_REQUEST.toString(), message));
+
+            return response;
+        }
+
+        songService.saveSong(updateSong);
+        response.setServiceStatus(getServiceStatus(HttpStatus.OK.toString(), message));
+
         return response;
     }
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "deleteSongRequest")
     @ResponsePayload
-    public DeleteSongResponse deleteUser(@RequestPayload DeleteSongRequest request) {
-        songService.deleteSong(request.getId());
-        ServiceStatus serviceStatus = new ServiceStatus();
-
-        serviceStatus.setStatus("SUCCESS");
-        serviceStatus.setMessage("Content Deleted Successfully");
+    public DeleteSongResponse deleteSong(@RequestPayload DeleteSongRequest request) {
+        boolean wasDeleted = songService.deleteSong(request.getId());
         DeleteSongResponse response = new DeleteSongResponse();
-        response.setServiceStatus(serviceStatus);
+        String message = wasDeleted ? "Content Deleted Successfully" : "Content Deletion Failed";
+
+        if (!wasDeleted) {
+            response.setServiceStatus(getServiceStatus(HttpStatus.NOT_FOUND.toString(), message));
+
+            return response;
+        }
+
+        response.setServiceStatus(getServiceStatus(HttpStatus.OK.toString(), message));
+
         return response;
+    }
+
+    private ServiceStatus getServiceStatus(String status, String message) {
+        ServiceStatus serviceStatus = new ServiceStatus();
+        serviceStatus.setStatus(status);
+        serviceStatus.setMessage(message);
+
+        return serviceStatus;
     }
 }

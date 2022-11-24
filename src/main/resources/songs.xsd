@@ -51,6 +51,7 @@
     <xs:element name="getSongByIdResponse">
         <xs:complexType>
             <xs:sequence>
+                <xs:element name="serviceStatus" type="tns:serviceStatus" />
                 <xs:element name="songInfo" type="tns:songInfo"/>
             </xs:sequence>
         </xs:complexType>
@@ -59,14 +60,15 @@
     <xs:element name="getSongByNameRequest">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="name" type="xs:long"/>
+                <xs:element name="name" type="xs:string"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
     <xs:element name="getSongByNameResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="songInfo" type="tns:songInfo"/>
+                <xs:element name="serviceStatus" type="tns:serviceStatus" />
+                <xs:element name="songInfo" type="tns:songInfo" maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
