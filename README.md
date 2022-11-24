@@ -1,7 +1,7 @@
 # Song and Music Spring
 This project is a REST and SOAP api using Spring java as framework.
 
-For a detailed description of the code and its operation see CODE_GUIDE.MD
+For a detailed description of the code and its operation see CODE_GUIDE.md
 ## Installation and implementation guide 
 To install and test the software follow the steps below
 
