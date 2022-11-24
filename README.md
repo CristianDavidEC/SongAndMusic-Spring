@@ -20,7 +20,7 @@ Create a MySQL database
 
 __NOTE:__ Just create the database without the need for the tables or data, can also have an online database.
 
-Edit the application.properties file that is in the path with your connection data
+Edit the __application.properties__ file that is in the path with your connection data
 ```sh
 /src/main/resources/application.properties
 ```
