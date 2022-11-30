@@ -1,6 +1,5 @@
 package com.SongAndMusic.models;
 import javax.persistence.*;
-
 @Entity
 @Table(name = "songs")
 public class SongModel {
